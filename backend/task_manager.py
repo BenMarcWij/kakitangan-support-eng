@@ -10,7 +10,14 @@ class TaskManager:
         self.tasks = []
 
     def add_task(self, id, title, priority):
+        if priority == 1:
+            priority = "high"
+
         task = Task(id, title, priority)
+        for t in self.tasks:
+            if t.id == id:
+                return task
+        
         self.tasks.append(task)
         return task
 
@@ -19,8 +26,6 @@ class TaskManager:
             if task.id == id:
                 task.status = new_status
                 return True
-        for task in self.tasks:
-            task.status = new_status
         return False
 
     def get_high_priority_tasks(self):
